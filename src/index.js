@@ -1,18 +1,25 @@
 const express = require("express");
-const students = require("./models/student");
+const bodyParser = require("body-parser");
+
+const studentsRouter = require("./Routers/studentsRouter");
+const studentRouter = require("./Routers/studentRouter");
+
+const teachersRouter = require("./Routers/teachersRouter");
+const teacherRouter = require("./Routers/teacherRouter");
 
 const app = express();
+
+app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
   res.send("hello");
 });
 
-app.get("/students", (req, res) => {
-  // res.status(200);
-  // res.send(students);
+app.use("/students", studentsRouter);
+app.use("/student", studentRouter);
 
-  res.status(200).json({ students });
-});
+app.use("/teachers", teachersRouter);
+app.use("/teacher", teacherRouter);
 
 const server = app.listen(3000, (req, res) => {
   console.log(`server running on port : ${server.address().port}`);

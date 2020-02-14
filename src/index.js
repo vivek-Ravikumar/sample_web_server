@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
   res.send("hello");
-});
+}); 
 
 app.use("/students", studentsRouter);
 app.use("/student", studentRouter);

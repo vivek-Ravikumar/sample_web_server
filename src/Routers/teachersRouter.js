@@ -23,18 +23,14 @@ teachersRouter
     const { data } = req.body;
 
     if (data) {
-      let clientdata = data.split(",");
-      // console.log(clientdata);
       let numberOfDeletions = 0;
-      for (let i in clientdata) {
+      for (let i in data) {
         for (let j in teachers) {
-          //console.log(clientdata[i], teachers[j].id);
-          if (Number(clientdata[i]) === teachers[j].id) {
+          if (Number(data[i]) === teachers[j].id) {
             teachers.splice(j, 1);
             numberOfDeletions++;
           }
         }
-        //console.log(numberOfDeletions);
       }
       if (numberOfDeletions) {
         res.send("deletion successfull");

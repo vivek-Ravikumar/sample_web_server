@@ -36,6 +36,7 @@ cleanRoom()
   })
   .catch(error => console.log(error));
 
+//Asych function with await
 const myAsynchFunction = async () => {
   try {
     const isCleaned = await cleanRoom();

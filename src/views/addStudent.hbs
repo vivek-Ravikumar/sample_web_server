@@ -1,0 +1,63 @@
+<h1>Student Form</h1>
+
+<form action="/student" id="addStudentForm" method="POST" target="_default">
+
+  <input type="hidden" name="id" value="{{studentID}}">
+  <label for="fname">First Name</label>
+  <input type="text" id="fname" name="firstName" placeholder="First Name">
+  <br>
+  <label for="lname">Last Name</label>
+  <input type="text" id="lname" name="lastName" placeholder="Last Name">
+  <br>
+  <label for="age">Age</label>
+  <input type="text" id="age" name="age" placeholder="Age">
+  <br>
+  <label for="male">Male</label>
+  <input type="radio" id="male" name="gender" value="Male">
+
+  <label for="female">Female</label>
+  <input type="radio" id="female" name="gender" value="Female">
+
+  <br>
+
+  <input type="submit" value='Add student'>
+
+</form>
+
+<script>
+  const $addStudentForm = document.querySelector('#addStudentForm');
+
+  let formDetailsJson = {};
+  $addStudentForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const studentFormDetails = new FormData($addStudentForm);
+    for (const fieldDetail of studentFormDetails.entries()) {
+      const [key, value] = fieldDetail;
+      formDetailsJson[key] = value;
+    }
+    console.log(formDetailsJson);
+
+    const config = {
+      method: 'POST',
+      headers: {
+        Content- Type: 'application/json',
+    }
+    body: JSON.stringify(formDetailsJson)
+  };
+  fetch('/student', config)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw Error('request Failed')
+      }
+    })
+    .then(data => {
+      alert(data.message);
+    })
+    .catch(() => {
+      alert('something went wrong');
+    })
+
+  })
+</script>
